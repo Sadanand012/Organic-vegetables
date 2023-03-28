@@ -3,6 +3,8 @@ package com.organic.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +33,8 @@ public class Cart {
 	private Order order;
 
 	@OneToMany(mappedBy = "cart",cascade = CascadeType.ALL)
-	private List<VegetableDTO> vegetable = new ArrayList<>();
+	@JsonIgnore
+	private List<Vegetable> vegetable = new ArrayList<>();
 
 
 }
