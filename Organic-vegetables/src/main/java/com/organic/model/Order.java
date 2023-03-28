@@ -39,7 +39,7 @@ public class Order {
 	
 	@OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
 	@JsonIgnore
-	private List<VegetableDTO> vegetableList=new ArrayList<>();
+	private List<Vegetable> vegetableList=new ArrayList<>();
 	
 
 }
