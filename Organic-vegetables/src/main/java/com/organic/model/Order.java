@@ -38,7 +38,6 @@ public class Order {
 //	private Cart cart;
 	
 	@OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
-	@JsonIgnore
 	private List<Vegetable> vegetableList=new ArrayList<>();
 	
 
