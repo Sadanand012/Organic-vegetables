@@ -29,4 +29,17 @@ public class GlobalException {
 		me.setMessage(ie.getMessage());
 		return new ResponseEntity<>(me,HttpStatus.BAD_REQUEST);
 	}
+	
+	
+	//All order Related Exception
+	
+	@ExceptionHandler(OrderNotFoundException.class)
+	public ResponseEntity<MyErrorDetails> OrderNotFound(OrderNotFoundException o,WebRequest req){
+		MyErrorDetails me=new MyErrorDetails();
+		me.setTimeStamp(LocalDateTime.now());
+		me.setDetails(req.getDescription(false));
+		me.setMessage(o.getMessage());
+		return new ResponseEntity<>(me,HttpStatus.BAD_REQUEST);
+	}
+	
 }
