@@ -20,6 +20,9 @@ public class CurrentUserSession {
 	@Column(unique = true)
 	private Integer id;
 	private String uuid;
-	private LocalDateTime localDateTime;
+	private LocalDateTime localDateTime;	
+	
+	
+	
 
 }
