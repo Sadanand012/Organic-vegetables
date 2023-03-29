@@ -29,4 +29,31 @@ public class GlobalException {
 		me.setMessage(ie.getMessage());
 		return new ResponseEntity<>(me,HttpStatus.BAD_REQUEST);
 	}
+	
+	
+	@ExceptionHandler(CustomerException.class)
+	public ResponseEntity<MyErrorDetails> CustomerException(CustomerException ie,WebRequest req){
+		MyErrorDetails me=new MyErrorDetails();
+		me.setTimeStamp(LocalDateTime.now());
+		me.setDetails(req.getDescription(false));
+		me.setMessage(ie.getMessage());
+		return new ResponseEntity<>(me,HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	@ExceptionHandler(FeedbackException.class)
+	public ResponseEntity<MyErrorDetails> FeedbackException(FeedbackException ie,WebRequest req){
+		MyErrorDetails me=new MyErrorDetails();
+		me.setTimeStamp(LocalDateTime.now());
+		me.setDetails(req.getDescription(false));
+		me.setMessage(ie.getMessage());
+		return new ResponseEntity<>(me,HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	
+	
+	
+	
+	
 }
