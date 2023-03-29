@@ -30,7 +30,6 @@ public class GlobalException {
 		return new ResponseEntity<>(me,HttpStatus.BAD_REQUEST);
 	}
 	
-
 	@ExceptionHandler(AdminAlreadyExistException.class)
 	public ResponseEntity<MyErrorDetails> AdminAlreadyExistExceptionInfo(AdminAlreadyExistException ie,WebRequest req){
 		MyErrorDetails me=new MyErrorDetails();
@@ -40,7 +39,6 @@ public class GlobalException {
 		return new ResponseEntity<>(me,HttpStatus.BAD_REQUEST);
 	}
 	
-
 	@ExceptionHandler(NoAdminFoundException.class)
 	public ResponseEntity<MyErrorDetails> NoAdminFoundExceptionInfo(NoAdminFoundException ie,WebRequest req){
 		MyErrorDetails me=new MyErrorDetails();
@@ -50,7 +48,6 @@ public class GlobalException {
 		return new ResponseEntity<>(me,HttpStatus.BAD_REQUEST);
 	}
 	
-
 	@ExceptionHandler(AdminIdNotFoundException.class)
 	public ResponseEntity<MyErrorDetails> NoAdminFoundExceptionInfo(AdminIdNotFoundException ie,WebRequest req){
 		MyErrorDetails me=new MyErrorDetails();
