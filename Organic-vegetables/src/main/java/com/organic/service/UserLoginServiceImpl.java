@@ -2,6 +2,7 @@ package com.organic.service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.Random;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.tomcat.util.http.fileupload.ThresholdingOutputStream;
@@ -16,15 +17,19 @@ import com.organic.model.Admin;
 import com.organic.model.CurrentUserSession;
 import com.organic.model.Customer;
 import com.organic.model.User;
+import com.organic.repository.CustomerRepository;
+import com.organic.repository.IAdminRepository;
 import com.organic.repository.UserSessionRepo;
 
 @Service
 public class UserLoginServiceImpl implements UserLoginService{
 	//customer and admin repo
-	
+	@Autowired
+	private CustomerRepository customerDao;
 	@Autowired
 	private UserSessionRepo userSessionRepo;
-	
+	@Autowired
+	private IAdminRepository adminDao;
 
 	@Override
 	public String logIn(User user) throws UserException {
@@ -42,7 +47,7 @@ public class UserLoginServiceImpl implements UserLoginService{
 			 }
 			 
 			 if(admin.getPassword().equals(user.getPassword())) {
-				 String key= RandomStringUtils.random(6);
+				 String key= Random.make(6);
 				 CurrentUserSession currentAdminSession = new CurrentUserSession(admin.getAdminId(),key,LocalDateTime.now());
 
 				 userSessionRepo.save(currentAdminSession);
@@ -53,8 +58,8 @@ public class UserLoginServiceImpl implements UserLoginService{
 			 }	 
 			 
 		}else if(user.getRole().equalsIgnoreCase("customer")){
-			
-			Customer customer = customerDao.findByEmailId(user.getUserId());
+			//user id is mobile number
+			Customer customer = customerDao.findByMobileNumber(user.getUserId());
 			 
 			 if(customer==null) {
 				 throw new UserException("Invalid User Id !");
