@@ -1,7 +1,6 @@
 package com.organic.model;
 
 
-
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -11,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,11 +31,5 @@ public class Vegetable {
 	private Order order;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Cart cart;
-	
-	
-	// added by Akash
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "vegId") // it will save to create extra column
-	private Set<Feedback> feedbacks;
 		
 }
