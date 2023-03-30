@@ -11,8 +11,8 @@ public interface IAdminService {
 	
 	public Admin addAdmin(Admin admin)throws AdminAlreadyExistException;
 	public Admin updateAdmin(Admin admin)throws NoAdminFoundException;
-	public Admin removeAdmin(int adminId)throws NoAdminFoundException;
-	public Admin viewAdmin(Admin admin)throws AdminIdNotFoundException;
+	public Admin removeAdmin(Integer adminId)throws NoAdminFoundException;
+	public Admin viewAdmin(Integer adminId)throws AdminIdNotFoundException;
 	
 	//Extra 
 	public List<Admin> viewAllAdmin();

@@ -17,15 +17,27 @@ import com.organic.model.Admin;
 import com.organic.model.CurrentUserSession;
 import com.organic.model.Customer;
 import com.organic.model.User;
+<<<<<<< HEAD
+import com.organic.repository.AdminRepository;
+=======
 import com.organic.repository.CustomerRepository;
-import com.organic.repository.IAdminRepository;
+>>>>>>> main
 import com.organic.repository.UserSessionRepo;
 
 @Service
 public class UserLoginServiceImpl implements UserLoginService{
 	//customer and admin repo
+<<<<<<< HEAD
+	
+	
+	
+	@Autowired
+	private AdminRepository adminDao;
+	
+=======
 	@Autowired
 	private CustomerRepository customerDao;
+>>>>>>> main
 	@Autowired
 	private UserSessionRepo userSessionRepo;
 	@Autowired

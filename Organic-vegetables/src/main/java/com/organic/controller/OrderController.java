@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.organic.model.Order;
 import com.organic.service.OrderService;
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
 @RestController
 public class OrderController {
 

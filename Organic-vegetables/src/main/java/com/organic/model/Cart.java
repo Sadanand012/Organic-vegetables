@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,15 +27,13 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer cartId;
 	
-
+	@OneToOne(cascade = CascadeType.ALL)
 	private Integer customerId;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	private Order order;
 
-	@OneToMany(mappedBy = "cart",cascade = CascadeType.ALL)
-	
+	@OneToMany(mappedBy = "cart",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<Vegetable> vegetable = new ArrayList<>();
 
+	
 
 }
