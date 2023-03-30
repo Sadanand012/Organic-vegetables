@@ -39,10 +39,10 @@ public class FeedbackServiceImpl implements FeedbackService{
 	public Feedback addFeedback(Feedback feedback, String sessionKey) throws FeedbackException, UserException {
 		
 		
-		// 1st check this customer is logged in or not by getting customerId from feedback.
+		// 1st check this customer is logged in or not.
 		CurrentUserSession loggedInUser = currentUserSession.findByUuid(sessionKey);
 		
-		if(loggedInUser == null) throw new FeedbackException("Please login first, to add feedback");
+		if(loggedInUser == null) throw new FeedbackException("Please login first, to give feedback");
 		
 		// 2nd check if customerId from feedback is same as loggedInUser (means:- same user is adding feedback).
 		if(loggedInUser.getUserId().equals(feedback.getCustomerId())) {
@@ -57,7 +57,7 @@ public class FeedbackServiceImpl implements FeedbackService{
 			
 			boolean isPurchased = orders.stream().anyMatch(o -> o.getVegetableList().stream().anyMatch(v -> v.getVegId() == feedback.getVegId()));
 			
-			if(!isPurchased) throw new OrderNotFoundException("Can't add feedback without purchase");
+			if(!isPurchased) throw new OrderNotFoundException("Can't give feedback without purchase");
 			
 			return feedbackRepository.save(feedback);  // now feedback added
 			
