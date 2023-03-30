@@ -3,6 +3,8 @@ package com.organic.model;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +30,7 @@ public class Vegetable {
 	private Integer quantity;
 
 	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Order order;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Cart cart;

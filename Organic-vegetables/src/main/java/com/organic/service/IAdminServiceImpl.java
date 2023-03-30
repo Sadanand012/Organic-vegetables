@@ -3,6 +3,7 @@ package com.organic.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.organic.exception.AdminAlreadyExistException;
@@ -14,6 +15,7 @@ import com.organic.repository.IAdminRepository;
 @Service
 public class IAdminServiceImpl implements IAdminService{
 	
+	@Autowired
 	private IAdminRepository repo;
 
 	@Override
