@@ -1,5 +1,6 @@
 package com.organic.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.organic.exception.OrderNotFoundException;
 import com.organic.model.Order;
 import com.organic.service.OrderService;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 @RestController
 public class OrderController {
 
@@ -52,11 +55,17 @@ public class OrderController {
 		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 	
-//	public List<Order>viewAllOrdersByDate(LocalDate date)throws OrderNotFoundException;
+
 	
 	@GetMapping("/viewOrderList")
 	public ResponseEntity<List<Order>>viewOrderListHandler(){
 		List<Order>list=orderService.viewOrderList();
+		return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	
+	@GetMapping("/viewOrderListDate")
+	public ResponseEntity<List<Order>>viewAllOrdersByDate(@PathVariable	LocalDate date){
+		List<Order>list=orderService.viewAllOrdersByDate(date);
 		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 	

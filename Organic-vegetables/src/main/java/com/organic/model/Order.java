@@ -9,11 +9,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +31,11 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer orderNo;
+//	private Integer customerId;
 	private Double totalAmount;
 	private String status;
+	private LocalDate date;
+	
 //	make customer and billing relation
 	
 //	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "order")
@@ -38,8 +43,8 @@ public class Order {
 //	private Cart cart;
 	
 	@OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
-	@JsonIgnore
 	private List<Vegetable> vegetableList=new ArrayList<>();
 	
-
+	@OneToOne(mappedBy = "order",cascade = CascadeType.ALL)
+	private Customer customer;
 }

@@ -21,6 +21,30 @@ public class GlobalException {
 		return new ResponseEntity<>(me,HttpStatus.BAD_REQUEST);
 	}
 	
+	//Order Not found Exception handler 
+	
+	@ExceptionHandler(OrderNotFoundException.class)
+	public ResponseEntity<MyErrorDetails> OrderNotFound(OrderNotFoundException ie,WebRequest req){
+		MyErrorDetails me=new MyErrorDetails();
+		me.setTimeStamp(LocalDateTime.now());
+		me.setDetails(req.getDescription(false));
+		me.setMessage(ie.getMessage());
+		return new ResponseEntity<>(me,HttpStatus.BAD_REQUEST);
+	}
+	
+	//Billing Not found Exception Handler
+	
+	@ExceptionHandler(BillingDetailsNotFoundException.class)
+	public ResponseEntity<MyErrorDetails> BillingDetailsNotFound(BillingDetailsNotFoundException ie,WebRequest req){
+		MyErrorDetails me=new MyErrorDetails();
+		me.setTimeStamp(LocalDateTime.now());
+		me.setDetails(req.getDescription(false));
+		me.setMessage(ie.getMessage());
+		return new ResponseEntity<>(me,HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public ResponseEntity<MyErrorDetails> NoHandlerFoundException(NoHandlerFoundException ie,WebRequest req){
 		MyErrorDetails me=new MyErrorDetails();

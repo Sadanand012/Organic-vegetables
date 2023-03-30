@@ -17,9 +17,9 @@ public interface OrderService {
 	
 	public Order updateOrderDetails(Order order) throws OrderNotFoundException;
 	
-	public List<Order>viewAllOrders(Integer customerId)throws OrderNotFoundException;
+	public List<Order>viewAllOrders(Integer orderNo)throws OrderNotFoundException;
 	
-//	public List<Order>viewAllOrdersByDate(LocalDate date)throws OrderNotFoundException;
+	public List<Order>viewAllOrdersByDate(LocalDate date)throws OrderNotFoundException;
 	
 	public List<Order>viewOrderList()throws OrderNotFoundException;
 	
