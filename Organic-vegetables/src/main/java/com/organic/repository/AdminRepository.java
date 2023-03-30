@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.organic.model.Admin;
 
 @Repository
-public interface IAdminRepository extends JpaRepository<Admin, Integer>{
+public interface AdminRepository extends JpaRepository<Admin, Integer>{
 	
 	
 	@Modifying
@@ -21,5 +21,5 @@ public interface IAdminRepository extends JpaRepository<Admin, Integer>{
 	@Query(value="Select * from admin", nativeQuery = true)
 	public List<Admin> getAllAdmins();
 	
-
+	public Admin findByEmailId(String email);
 }

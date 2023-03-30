@@ -16,11 +16,17 @@ import com.organic.model.Admin;
 import com.organic.model.CurrentUserSession;
 import com.organic.model.Customer;
 import com.organic.model.User;
+import com.organic.repository.AdminRepository;
 import com.organic.repository.UserSessionRepo;
 
 @Service
 public class UserLoginServiceImpl implements UserLoginService{
 	//customer and admin repo
+	
+	
+	
+	@Autowired
+	private AdminRepository adminDao;
 	
 	@Autowired
 	private UserSessionRepo userSessionRepo;

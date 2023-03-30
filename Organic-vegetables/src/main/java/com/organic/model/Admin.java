@@ -28,7 +28,6 @@ public class Admin {
 	@NotBlank(message = "Admin Name should not black")
 	private String adminName;
 	
-	@Pattern(regexp="(0|91)?[7-9][0-9]{9}")
 	private String contactNumber;
 	@Email
 	private String emailId;
@@ -37,5 +36,6 @@ public class Admin {
 	
 	@OneToOne
 	private User user;
+	
 	
 }

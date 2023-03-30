@@ -5,48 +5,41 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.organic.exception.AdminAlreadyExistException;
+
 import com.organic.exception.AdminIdNotFoundException;
 import com.organic.exception.NoAdminFoundException;
 import com.organic.model.Admin;
-import com.organic.repository.IAdminRepository;
+import com.organic.repository.AdminRepository;
 
 @Service
 public class IAdminServiceImpl implements IAdminService{
 	
-	private IAdminRepository repo;
+	private AdminRepository repo;
 
+	//Add 
 	@Override
-	public Admin addAdmin(Admin admin) throws AdminAlreadyExistException {
+	public Admin addAdmin(Admin admin) {
 		
-		if(repo.existsById(admin.getAdminId())){
-			throw new AdminAlreadyExistException("Admin Already Exist !");
-		}else {
-			return repo.save(admin);
-		}
+		return repo.save(admin);
+		
 	}
 
+	//Update
+	
 	@Override
 	public Admin updateAdmin(Admin admin) throws NoAdminFoundException {
 		
-		int result=0;
+		Admin updAdm= repo.findById(admin.getAdminId())
+				.orElseThrow(() -> new NoAdminFoundException("Admin not Exist with id : "+admin.getAdminId()));
 		
+		return repo.save(updAdm);
 		
-		int AdmId= admin.getAdminId();
-		String cont_Num= admin.getContactNumber();
-		String email= admin.getEmailId();
-		
-		result = repo.updateAdminById(cont_Num, email, AdmId);
-		
-		if(result>=1) {
-			return admin;
-		}else {
-			throw new NoAdminFoundException("Admin not Exist with id : "+admin.getAdminId());
-		}
 	}
 
+	//Remove
+	
 	@Override
-	public Admin removeAdmin(int adminId) throws NoAdminFoundException {
+	public Admin removeAdmin(Integer adminId) throws NoAdminFoundException {
 		Optional<Admin> adm= repo.findById(adminId);
 		if(repo.existsById(adminId)) {
 			repo.delete(adm.get());
@@ -56,24 +49,27 @@ public class IAdminServiceImpl implements IAdminService{
 		return adm.get();
 	}
 
+	//viewBy Id
+	
 	@Override
-	public Admin viewAdmin(Admin admin) throws AdminIdNotFoundException {
+	public Admin viewAdmin(Integer adminId) throws AdminIdNotFoundException {
+		Optional<Admin> adm= repo.findById(adminId);
 		
-		if(repo.existsById(admin.getAdminId())) {
-			return repo.getById(admin.getAdminId());
+		if(repo.existsById(adminId)) {
+			return adm.get();
 		}else {
-			throw new AdminIdNotFoundException("Admin not Exist with id : "+admin.getAdminId());
+			throw new AdminIdNotFoundException("Admin not Exist with id : "+adminId);
 		}
 		
 	}
 
+	//View All Admin
+	
 	@Override
 	public List<Admin> viewAllAdmin() {
 		
 		return repo.getAllAdmins();
 	}
 
-//	public Admin findById(int id) throws NoAdminFoundException{
-//		return repo.findById(id).orElseThrow(()->new NoAdminFoundException("Admin not Exists !.."));
-//	}
+
 }
