@@ -29,8 +29,10 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer orderNo;
+	private Integer customerId;
 	private Double totalAmount;
 	private String status;
+	
 //	make customer and billing relation
 	
 //	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "order")

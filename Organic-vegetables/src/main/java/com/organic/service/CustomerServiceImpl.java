@@ -7,14 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.organic.exception.CustomerException;
+import com.organic.model.CurrentUserSession;
 import com.organic.model.Customer;
 import com.organic.repository.CustomerRepository;
+import com.organic.repository.UserSessionRepo;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
 	
 	@Autowired
 	private CustomerRepository customerRepository;
+	
+	@Autowired
+	private UserSessionRepo currentUserSesson;
 	
 
 	@Override
@@ -31,9 +36,17 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 	
 	@Override
-	public Customer updateCustomer(Customer customer, String sessonKey) throws CustomerException {
+	public Customer updateCustomer(Customer customer, String sessionKey) throws CustomerException {
 		
-		return null;
+		CurrentUserSession loggedInUser = currentUserSesson.findByUuid(sessionKey);
+		
+		if(loggedInUser == null) throw new CustomerException("Please provide a valid key to update a customer");
+		
+		if(customer.getCustomerId() == loggedInUser.getUserId()) {
+			return customerRepository.save(customer);
+		}
+		
+		throw new CustomerException("Invalid customer details, please login first");
 	}
 	
 	
