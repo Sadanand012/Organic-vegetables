@@ -15,12 +15,9 @@ import com.organic.repository.AdminRepository;
 @Service
 public class IAdminServiceImpl implements IAdminService{
 	
-<<<<<<< HEAD
+
 	private AdminRepository repo;
-=======
-	@Autowired
-	private IAdminRepository repo;
->>>>>>> main
+
 
 	//Add 
 	@Override
