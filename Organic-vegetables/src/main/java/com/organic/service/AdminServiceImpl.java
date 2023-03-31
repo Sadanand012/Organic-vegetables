@@ -15,7 +15,7 @@ import com.organic.repository.AdminRepository;
 @Service
 public class AdminServiceImpl implements AdminService{
 	
-
+	@Autowired
 	private AdminRepository repo;
 
 

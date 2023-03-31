@@ -34,8 +34,8 @@ public class Admin {
 	
 	private String password;
 	
-	@OneToOne
-	private User user;
+//	@OneToOne
+//	private User user;
 	
 	
 }
