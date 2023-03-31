@@ -34,5 +34,6 @@ public class Vegetable {
 	private Order order;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Cart cart;
+	
 		
 }

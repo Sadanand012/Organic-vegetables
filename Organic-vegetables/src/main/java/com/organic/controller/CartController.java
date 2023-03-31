@@ -17,14 +17,23 @@ import com.organic.exception.CartException;
 import com.organic.exception.VegetableException;
 import com.organic.model.Cart;
 import com.organic.model.Vegetable;
-import com.organic.service.ICartService;
+import com.organic.service.CartService;
 
 @RestController
-public class ICartController {
+public class CartController {
 	
 	@Autowired
-	private ICartService cartService;
+	private CartService cartService;
 	
+	
+	//Create Cart
+	@PostMapping("/Cart")
+	public ResponseEntity<Cart> CreateCart(@RequestBody Cart cart) throws CartException{
+		
+		Cart c1 = cartService.createCart(cart);
+	
+		return new ResponseEntity<Cart>(c1, HttpStatus.CREATED);
+	}
 	
 	//add To Cart
 	@PostMapping("/add/{id}")
