@@ -27,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService{
 		
 		// First we will check given customer is already registered with same mobile no or not
 		Customer existingCustomer = customerRepository.findByMobileNumber(customer.getMobileNumber());
-		
+//		System.out.println(existingCustomer);
 		if(existingCustomer != null) throw new CustomerException("This Mobile number is already registered");
 		
 		return customerRepository.save(customer);
