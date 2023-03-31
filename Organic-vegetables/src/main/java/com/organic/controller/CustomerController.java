@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.organic.model.Customer;
 import com.organic.service.CustomerService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 public class CustomerController {
@@ -25,7 +25,7 @@ public class CustomerController {
 	
 	
 	@PostMapping("/customers")
-	public ResponseEntity<Customer> addCustomerHandler(@RequestBody Customer customer){
+	public ResponseEntity<Customer> addCustomerHandler(@org.springframework.web.bind.annotation.RequestBody Customer customer){
 		
 		Customer registeredCustomer = customerService.addCustomer(customer);
 		
@@ -35,7 +35,7 @@ public class CustomerController {
 	
 	
 	@PutMapping("/customers/{key}")
-	public ResponseEntity<Customer> updateCustomerHandler(@RequestBody Customer customer, @PathVariable("key") String sessionKey){
+	public ResponseEntity<Customer> updateCustomerHandler(@org.springframework.web.bind.annotation.RequestBody Customer customer, @PathVariable("key") String sessionKey){
 		
 		Customer updatedCustomer = customerService.updateCustomer(customer, sessionKey);
 		
