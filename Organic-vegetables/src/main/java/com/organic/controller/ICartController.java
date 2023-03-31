@@ -45,7 +45,7 @@ public class ICartController {
 	
 	//Decrease Quantity
 	
-	@PutMapping("/Increase/{cartId}/{vegId}/{quantity}")
+	@PutMapping("/decrease/{cartId}/{vegId}/{quantity}")
 	public ResponseEntity<Cart> decreaseQuantity(@PathVariable("cartId")Integer cartId,@PathVariable("vegId")Integer vegId,@PathVariable("quantity")Integer quantity) throws VegetableException, CartException{
 		Cart cart = cartService.decreaseVegQantity(cartId, quantity, vegId);
 		return new ResponseEntity<>(cart,HttpStatus.OK);
@@ -61,7 +61,7 @@ public class ICartController {
 	
 	//Delete All Vegetable by id
 	
-	@GetMapping("remove/{id}")
+	@DeleteMapping("/remove/{id}")
 	public ResponseEntity<Cart> removeAllvege(@PathVariable("id")Integer cartId) throws CartException{
 		Cart cart = cartService.removeAllVegetable(cartId);
 		return new ResponseEntity<>(cart,HttpStatus.OK);

@@ -31,7 +31,7 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer orderNo;
-//	private Integer customerId;
+	private Integer customerId;
 	private Double totalAmount;
 	private String status;
 	private LocalDate date;

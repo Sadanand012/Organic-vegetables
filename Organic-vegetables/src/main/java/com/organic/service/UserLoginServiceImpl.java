@@ -17,31 +17,28 @@ import com.organic.model.Admin;
 import com.organic.model.CurrentUserSession;
 import com.organic.model.Customer;
 import com.organic.model.User;
-<<<<<<< HEAD
+
 import com.organic.repository.AdminRepository;
-=======
+
 import com.organic.repository.CustomerRepository;
->>>>>>> main
 import com.organic.repository.UserSessionRepo;
+
+import net.bytebuddy.utility.RandomString;
 
 @Service
 public class UserLoginServiceImpl implements UserLoginService{
 	//customer and admin repo
-<<<<<<< HEAD
-	
-	
 	
 	@Autowired
 	private AdminRepository adminDao;
 	
-=======
+
 	@Autowired
 	private CustomerRepository customerDao;
->>>>>>> main
+
 	@Autowired
 	private UserSessionRepo userSessionRepo;
-	@Autowired
-	private IAdminRepository adminDao;
+
 
 	@Override
 	public String logIn(User user) throws UserException {
@@ -59,7 +56,7 @@ public class UserLoginServiceImpl implements UserLoginService{
 			 }
 			 
 			 if(admin.getPassword().equals(user.getPassword())) {
-				 String key= Random.make(6);
+				 String key= RandomString.make(6);
 				 CurrentUserSession currentAdminSession = new CurrentUserSession(admin.getAdminId(),key,LocalDateTime.now());
 
 				 userSessionRepo.save(currentAdminSession);
@@ -83,7 +80,7 @@ public class UserLoginServiceImpl implements UserLoginService{
 			 }
 			 
 			 if(customer.getPassword().equals(user.getPassword())) {
-				 String key= RandomStringUtils.random(6);
+				 String key= RandomString.make(6);
 				 
 				 CurrentUserSession currentCustomerSession = new CurrentUserSession(customer.getCustomerId(),key,LocalDateTime.now());
 
