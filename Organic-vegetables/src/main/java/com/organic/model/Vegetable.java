@@ -35,5 +35,6 @@ public class Vegetable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Cart cart;
+	
 		
 }

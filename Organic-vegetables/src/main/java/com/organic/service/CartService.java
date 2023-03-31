@@ -7,8 +7,9 @@ import com.organic.exception.VegetableException;
 import com.organic.model.Cart;
 import com.organic.model.Vegetable;
 
-public interface ICartService {
+public interface CartService {
 	
+	public Cart createCart(Cart cart) throws CartException;
 	public Vegetable addToCart(Vegetable veg, Integer cartId)throws VegetableException,CartException;
 	public Cart increaseVegQantity(Integer cartId, Integer quantity,Integer vegId) throws VegetableException,CartException;
 	public Cart decreaseVegQantity(Integer cartId, Integer quantity,Integer vegId) throws VegetableException,CartException;

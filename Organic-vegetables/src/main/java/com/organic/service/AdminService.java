@@ -7,7 +7,7 @@ import com.organic.model.Admin;
 
 import java.util.List;
 
-public interface IAdminService {
+public interface AdminService {
 	
 	public Admin addAdmin(Admin admin)throws AdminAlreadyExistException;
 	public Admin updateAdmin(Admin admin)throws NoAdminFoundException;
