@@ -19,6 +19,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotNull;
 
 
 @Entity
@@ -30,13 +31,13 @@ public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer customerId;
-	
+	@NotNull
 	private String customerName;
-	
+	@NotNull
 	private String mobileNumber;
-	
+	@NotNull
 	private String emailId;
-	
+	@NotNull
 	private String password;
 	
 	@Embedded
