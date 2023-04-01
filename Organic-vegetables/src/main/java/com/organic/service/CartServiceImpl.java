@@ -10,17 +10,31 @@ import com.organic.exception.CartException;
 import com.organic.exception.VegetableException;
 import com.organic.model.Cart;
 import com.organic.model.Vegetable;
-import com.organic.repository.ICartRepository;
+import com.organic.repository.CartRepository;
 import com.organic.repository.VegetableRepository;
 
 @Service
-public class ICartServiceImpl implements ICartService{
+public class CartServiceImpl implements CartService{
 
 	@Autowired
-	private ICartRepository CartRepo;
+	private CartRepository CartRepo;
 	
 	@Autowired
 	private VegetableRepository vegeRepo;
+	
+	//Create Cart 
+	
+	@Override
+	public Cart createCart(Cart cart) throws CartException {
+		Cart create= CartRepo.save(cart);
+		
+		if(create==null) {
+			throw new CartException("Cart Not Created");
+		}else {
+			return create;
+		}
+	}
+
 	
 	// add to Cart
 	
@@ -88,13 +102,37 @@ public class ICartServiceImpl implements ICartService{
 		if(cart.isPresent()) {
 			List<Vegetable> lists= cart.get().getVegetable();
 			
-			for (Vegetable list : lists) {
-				if(list.getVegId() == vegId) {
-					list.setQuantity(list.getQuantity()-quantity);
-				}
+			Optional<Vegetable> vege= vegeRepo.findById(vegId);
+			
+			
+			// Checking Vegetable Stock
+			if(!vege.isPresent()) {
+				throw new VegetableException("Vegetable is not in Stock");
 			}
 			
+			boolean flag= false;
+			
+			// If Required Stock is there Then else Throw error 
+			if(vege.get().getQuantity()>quantity) {
+				vege.get().setQuantity(vege.get().getQuantity()-quantity);
+				flag=true;
+			}else {
+				throw new VegetableException("Vegetable Quantity is not Available ");
+			}
+			
+			//If we have deducted the Stock quantity from the VegetableDTO
+			if(flag) {
+				for (Vegetable list : lists) {
+					if(list.getVegId() == vegId) {
+						list.setQuantity(list.getQuantity()+quantity);
+					}
+				}
+			}
+		
+			
 			newCart.setVegetable(lists);
+			
+			//Saving here 
 			Cart finalCart=CartRepo.save(newCart);
 			
 			return finalCart;
@@ -113,7 +151,7 @@ public class ICartServiceImpl implements ICartService{
 			
 			for (Vegetable list : lists) {
 				if(list.getVegId() == vegId) {
-					list.setQuantity(list.getQuantity()+quantity);
+					list.setQuantity(list.getQuantity()-quantity);
 				}
 			}
 			
@@ -178,6 +216,7 @@ public class ICartServiceImpl implements ICartService{
 		}
 		return list;
 	}
+
 
 	
 

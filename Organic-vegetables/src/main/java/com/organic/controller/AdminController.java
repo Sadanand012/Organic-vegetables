@@ -16,13 +16,13 @@ import com.organic.exception.AdminAlreadyExistException;
 import com.organic.exception.AdminIdNotFoundException;
 import com.organic.exception.NoAdminFoundException;
 import com.organic.model.Admin;
-import com.organic.service.IAdminService;
+import com.organic.service.AdminService;
 
 @RestController
-public class IAdminController {
+public class AdminController {
 	
 	@Autowired
-	private IAdminService adminServiceDao;
+	private AdminService adminServiceDao;
 	
 	//Register Admin
 	

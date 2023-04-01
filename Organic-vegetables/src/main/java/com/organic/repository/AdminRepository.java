@@ -10,10 +10,12 @@ import org.springframework.stereotype.Repository;
 
 import com.organic.model.Admin;
 
+import jakarta.transaction.Transactional;
+
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Integer>{
 	
-	
+	@Transactional 
 	@Modifying
 	@Query(value="Update admin set contactNumber=?1,emailId=?2,where adminId=?3",nativeQuery = true)
 	public int updateAdminById(String contactNumber,String emailId,int adminId);

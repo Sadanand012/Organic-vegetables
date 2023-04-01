@@ -13,9 +13,9 @@ import com.organic.model.Admin;
 import com.organic.repository.AdminRepository;
 
 @Service
-public class IAdminServiceImpl implements IAdminService{
+public class AdminServiceImpl implements AdminService{
 	
-
+	@Autowired
 	private AdminRepository repo;
 
 
@@ -35,7 +35,9 @@ public class IAdminServiceImpl implements IAdminService{
 		Admin updAdm= repo.findById(admin.getAdminId())
 				.orElseThrow(() -> new NoAdminFoundException("Admin not Exist with id : "+admin.getAdminId()));
 		
-		return repo.save(updAdm);
+		repo.save(updAdm);
+		
+		return updAdm;
 		
 	}
 

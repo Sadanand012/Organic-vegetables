@@ -24,8 +24,8 @@ public class Admin {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer adminId;
 	
-	@NotNull(message = "Admin name should not be null")
-	@NotBlank(message = "Admin Name should not black")
+//	@NotNull(message = "Admin name should not be null")
+//	@NotBlank(message = "Admin Name should not black")
 	private String adminName;
 	
 	private String contactNumber;
@@ -34,8 +34,8 @@ public class Admin {
 	
 	private String password;
 	
-	@OneToOne
-	private User user;
+//	@OneToOne
+//	private User user;
 	
 	
 }
