@@ -59,7 +59,7 @@ public class OrderController {
 		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 	
-	@GetMapping("/viewOrderListDate")
+	@GetMapping("/viewOrderListDate/{date}")
 	public ResponseEntity<List<Order>>viewAllOrdersByDate(@PathVariable	LocalDate date){
 		List<Order>list=orderService.viewAllOrdersByDate(date);
 		return new ResponseEntity<>(list,HttpStatus.OK);
