@@ -49,10 +49,7 @@
 * Spring Boot
 * Spring Data JPA
 * Hibernate
-* MySQL
-* HTML
-* CSS
-* JavaScript
+* Mysql
 
 ------------------------------------------------------------------------------
 ## Modules
