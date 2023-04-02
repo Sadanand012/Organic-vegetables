@@ -26,11 +26,17 @@ public class AdminServiceImpl implements AdminService{
 
 	//Add 
 	@Override
-	public Admin addAdmin(Admin admin) throws AdminAlreadyExistException{
+	public Admin addAdmin(Admin admin,String key) throws AdminAlreadyExistException, AdminIdNotFoundException{
+		
+		
+		if (!key.equals("organic")) {
+			throw new AdminIdNotFoundException("Please Provide Valid key !...");
+		}
 		
 		Admin adm= repo.findByEmailId(admin.getEmailId());
 		
-		if(adm== null) {
+		
+		if(adm != null) {
 			throw new AdminAlreadyExistException("Admin already exist ");
 		}
 		

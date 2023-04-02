@@ -27,10 +27,10 @@ public class AdminController {
 	
 	//Register Admin
 	
-	@PostMapping(path="/registerAdmin")
-	public ResponseEntity<Admin> registerNewAdminHandler(@RequestBody Admin admin) throws AdminAlreadyExistException{
+	@PostMapping(path="/registerAdmin/{authorization_key}")
+	public ResponseEntity<Admin> registerNewAdminHandler(@RequestBody Admin admin,@PathVariable String authorization_key) throws AdminAlreadyExistException, AdminIdNotFoundException{
 		
-		Admin addAdmin= adminServiceDao.addAdmin(admin);
+		Admin addAdmin= adminServiceDao.addAdmin(admin,authorization_key);
 		
 		return new ResponseEntity<Admin> (addAdmin,HttpStatus.CREATED);
 		

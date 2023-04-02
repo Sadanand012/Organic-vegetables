@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class Admin {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer adminId;
 	
 //	@NotNull(message = "Admin name should not be null")

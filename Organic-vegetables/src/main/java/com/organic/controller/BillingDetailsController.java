@@ -19,25 +19,25 @@ public class BillingDetailsController {
 
 	@Autowired
 	BillingDetailsService billingDetailsService;
+//	
+//	@PostMapping("/addbill")
+//	public ResponseEntity<BillingDetails> addBillHandler(@RequestBody BillingDetails bill){
+//		BillingDetails billingDetails2=billingDetailsService.addBill(bill);
+//		
+//		return new ResponseEntity<>(billingDetails2,HttpStatus.CREATED);
+//	}
 	
-	@PostMapping("/addbill")
-	public ResponseEntity<BillingDetails> addBillHandler(@RequestBody BillingDetails bill){
-		BillingDetails billingDetails2=billingDetailsService.addBill(bill);
-		
-		return new ResponseEntity<>(billingDetails2,HttpStatus.CREATED);
-	}
 	
-	
-	@PutMapping("/updateBill")
-	public ResponseEntity<BillingDetails> updateBillHandler(@RequestBody BillingDetails bill){
-		BillingDetails billingDetails=billingDetailsService.updateBill(bill);
-		return new ResponseEntity<>(billingDetails,HttpStatus.ACCEPTED);
-		
-	}
-	
-	@GetMapping("/viewBill/{billingId}")
-	public ResponseEntity<BillingDetails> viewBillHandler(@PathVariable Integer billingId){
-	BillingDetails billingDetails=billingDetailsService.viewBill(billingId);
+//	@PutMapping("/updateBill")
+//	public ResponseEntity<BillingDetails> updateBillHandler(@RequestBody BillingDetails bill){
+//		BillingDetails billingDetails=billingDetailsService.updateBill(bill);
+//		return new ResponseEntity<>(billingDetails,HttpStatus.ACCEPTED);
+//		
+//	}
+//	
+	@GetMapping("/viewBill/{orderId}")
+	public ResponseEntity<BillingDetails> viewBillHandler(@PathVariable Integer orderId){
+	BillingDetails billingDetails=billingDetailsService.viewBill(orderId);
 	
 	return new ResponseEntity<>(billingDetails,HttpStatus.OK);
 	

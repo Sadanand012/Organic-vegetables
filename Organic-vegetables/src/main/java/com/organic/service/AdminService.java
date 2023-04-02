@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface AdminService {
 	
-	public Admin addAdmin(Admin admin)throws AdminAlreadyExistException;
+	public Admin addAdmin(Admin admin,String key)throws AdminAlreadyExistException,AdminIdNotFoundException;
 	public Admin updateAdmin(Admin admin,String key)throws NoAdminFoundException, UserException;
 	public Admin removeAdmin(Integer adminId,String key)throws NoAdminFoundException,UserException;
 	public Admin viewAdmin(Integer adminId,String key)throws AdminIdNotFoundException,UserException;
