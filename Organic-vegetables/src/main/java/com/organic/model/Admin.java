@@ -29,7 +29,7 @@ public class Admin {
 	private String adminName;
 	
 	private String contactNumber;
-	@Email
+//	@Email
 	private String emailId;
 	
 	private String password;
