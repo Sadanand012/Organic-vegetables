@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.organic.exception.AdminAlreadyExistException;
 import com.organic.exception.AdminIdNotFoundException;
 import com.organic.exception.NoAdminFoundException;
+import com.organic.exception.UserException;
 import com.organic.model.Admin;
 import com.organic.service.AdminService;
 
@@ -26,7 +27,7 @@ public class AdminController {
 	
 	//Register Admin
 	
-	@PostMapping(path="/RegisterAdmin")
+	@PostMapping(path="/registerAdmin")
 	public ResponseEntity<Admin> registerNewAdminHandler(@RequestBody Admin admin) throws AdminAlreadyExistException{
 		
 		Admin addAdmin= adminServiceDao.addAdmin(admin);
@@ -37,28 +38,28 @@ public class AdminController {
 	
 	
 	//Update Admin
-	@PutMapping(path="/updateAdmin/{adminId}")
-	public ResponseEntity<Admin> updateAdm(@RequestBody Admin admin, @PathVariable Integer adminId) throws NoAdminFoundException{
-		Admin updateAdm= adminServiceDao.updateAdmin(admin);
+	@PutMapping(path="/updateAdmin/{key}")
+	public ResponseEntity<Admin> updateAdm(@RequestBody Admin admin,@PathVariable("key") String key) throws NoAdminFoundException, UserException{
+		Admin updateAdm= adminServiceDao.updateAdmin(admin,key);
 		
 		return new ResponseEntity<Admin> (updateAdm,HttpStatus.OK);
 	}
 	
 	
 	//Remove Admin
-	@PutMapping(path="/removeAdmin/{adminId}")
-	public ResponseEntity<Admin> removeAdm(@PathVariable Integer adminId) throws NoAdminFoundException{
+	@PutMapping(path="/removeAdmin/{adminId}/{key}")
+	public ResponseEntity<Admin> removeAdm(@PathVariable Integer adminId,@PathVariable("key") String key) throws NoAdminFoundException, UserException{
 		
-		Admin removeAdm = adminServiceDao.removeAdmin(adminId);
+		Admin removeAdm = adminServiceDao.removeAdmin(adminId,key);
 		
 		return new ResponseEntity<Admin>(removeAdm,HttpStatus.OK); 
 	}
 	
 	//View Admin
-	@GetMapping(path="/viewAdmin/{id}")
-	public ResponseEntity<Admin> viewAdm(@PathVariable("id") Integer adminId) throws NoAdminFoundException, AdminIdNotFoundException{
+	@GetMapping(path="/viewAdmin/{id}/{key}")
+	public ResponseEntity<Admin> viewAdm(@PathVariable("id") Integer adminId,@PathVariable("key") String key) throws NoAdminFoundException, AdminIdNotFoundException, UserException{
 		
-		Admin removeAdm = adminServiceDao.viewAdmin(adminId);
+		Admin removeAdm = adminServiceDao.viewAdmin(adminId,key);
 		
 		return new ResponseEntity<Admin>(removeAdm,HttpStatus.OK); 
 	}

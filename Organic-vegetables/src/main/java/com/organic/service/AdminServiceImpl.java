@@ -6,45 +6,71 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.organic.exception.AdminAlreadyExistException;
 import com.organic.exception.AdminIdNotFoundException;
 import com.organic.exception.NoAdminFoundException;
+import com.organic.exception.UserException;
 import com.organic.model.Admin;
+import com.organic.model.CurrentUserSession;
 import com.organic.repository.AdminRepository;
+import com.organic.repository.UserSessionRepo;
 
 @Service
 public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	private AdminRepository repo;
-
+	
+	@Autowired
+	private UserSessionRepo userSessionRepo;
 
 	//Add 
 	@Override
-	public Admin addAdmin(Admin admin) {
+	public Admin addAdmin(Admin admin) throws AdminAlreadyExistException{
 		
-		return repo.save(admin);
+		Admin adm= repo.findByEmailId(admin.getEmailId());
+		
+		if(adm== null) {
+			throw new AdminAlreadyExistException("Admin already exist ");
+		}
+		
+		repo.save(admin);
+		
+		return admin;
 		
 	}
 
 	//Update
 	
 	@Override
-	public Admin updateAdmin(Admin admin) throws NoAdminFoundException {
+	public Admin updateAdmin(Admin admin,String key) throws NoAdminFoundException, UserException {
+		
+		CurrentUserSession currentUserSession = userSessionRepo.findByUuid(key);
+		
+		if(currentUserSession.equals(null)) {
+			throw new UserException("Invalid session Id or Admin not Logged In");
+		}
 		
 		Admin updAdm= repo.findById(admin.getAdminId())
 				.orElseThrow(() -> new NoAdminFoundException("Admin not Exist with id : "+admin.getAdminId()));
 		
-		repo.save(updAdm);
+		repo.save(admin);
 		
-		return updAdm;
+		return admin;
 		
 	}
 
 	//Remove
 	
 	@Override
-	public Admin removeAdmin(Integer adminId) throws NoAdminFoundException {
+	public Admin removeAdmin(Integer adminId,String key) throws NoAdminFoundException, UserException {
+		
+		CurrentUserSession currentUserSession = userSessionRepo.findByUuid(key);
+		
+		if(currentUserSession.equals(null)) {
+			throw new UserException("Invalid session Id or Admin not Logged In");
+		}
+		
 		Optional<Admin> adm= repo.findById(adminId);
 		if(repo.existsById(adminId)) {
 			repo.delete(adm.get());
@@ -57,7 +83,14 @@ public class AdminServiceImpl implements AdminService{
 	//viewBy Id
 	
 	@Override
-	public Admin viewAdmin(Integer adminId) throws AdminIdNotFoundException {
+	public Admin viewAdmin(Integer adminId,String key) throws AdminIdNotFoundException, UserException {
+		CurrentUserSession currentUserSession = userSessionRepo.findByUuid(key);
+		
+		if(currentUserSession.equals(null)) {
+			throw new UserException("Invalid session Id or Admin not Logged In");
+		}
+		
+		
 		Optional<Admin> adm= repo.findById(adminId);
 		
 		if(repo.existsById(adminId)) {
@@ -73,7 +106,7 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<Admin> viewAllAdmin() {
 		
-		return repo.getAllAdmins();
+		return repo.findAll();
 	}
 
 
