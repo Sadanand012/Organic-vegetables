@@ -9,5 +9,5 @@ import com.organic.model.Cart;
 public interface CartRepository extends JpaRepository<Cart, Integer>{
 	
 	
-	
+	public Cart findByCustomerId(Integer id);
 }

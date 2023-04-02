@@ -24,9 +24,9 @@ public class OrderController {
 	@Autowired
 	OrderService orderService;
 	
-	@PostMapping("/addorder")
-	public ResponseEntity<Order> addOrderHandler(@RequestBody Order order) {
-		Order order2=orderService.addOrder(order);
+	@PostMapping("/addorder/{customerId}")
+	public ResponseEntity<Order> addOrderHandler(@PathVariable Integer customerId) {
+		Order order2=orderService.addOrder(customerId);
 		
 		return new ResponseEntity<>(order2,HttpStatus.CREATED);
 	}
@@ -37,11 +37,6 @@ public class OrderController {
 		return new ResponseEntity<>(order,HttpStatus.OK);
 	}
 	
-	@PutMapping("/updateOrder")
-	public ResponseEntity<Order>  updateOrderDetailsHandler(@RequestBody Order order){
-		Order order2=orderService.updateOrderDetails(order);
-		return new ResponseEntity<>(order2,HttpStatus.ACCEPTED);
-	}
 	
 	@GetMapping("/viewAll/{customerId}")
 	public ResponseEntity<List<Order>>viewAllOrdersHandler(@PathVariable Integer customerId){

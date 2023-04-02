@@ -7,10 +7,16 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.organic.exception.CustomerException;
 import com.organic.exception.OrderNotFoundException;
+import com.organic.model.Cart;
+import com.organic.model.CurrentUserSession;import com.organic.model.Customer;
 import com.organic.model.Order;
+import com.organic.model.VegetableDTO;
+import com.organic.repository.CartRepository;
 import com.organic.repository.CustomerRepository;
 import com.organic.repository.OrderRepository;
+import com.organic.repository.UserSessionRepo;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -19,12 +25,48 @@ public class OrderServiceImpl implements OrderService {
 	OrderRepository orderRepository;
 
 	@Autowired
+	UserSessionRepo currentUserSession;
+	
+	@Autowired
 	CustomerRepository customerRepository;
+	
+	@Autowired
+	CartRepository cartRepository;
 	@Override
-	public Order addOrder(Order order) {
-		// TODO Auto-generated method stub
-
-		return orderRepository.save(order);
+	public Order addOrder(Integer customerId) {
+		
+		
+		
+		CurrentUserSession loggedInUser = currentUserSession.findById(customerId).orElseThrow(()-> 
+										new CustomerException("Please provide a valid customerId or Login First"));
+		Order newOrder = new Order();
+		if(customerId == loggedInUser.getUserId()) {
+			
+			Cart cartDetailes= cartRepository.findByCustomerId(customerId);
+			
+			List<VegetableDTO> vegList= cartDetailes.getVegetable();
+			
+			Double totalPrice= 0.00;
+			
+			for(VegetableDTO list: vegList) {
+				
+				totalPrice += list.getPrice() * list.getQuantity();
+				
+			}
+			
+			newOrder.setCustomerId(customerId);
+			newOrder.setDate(LocalDate.now());
+			newOrder.setTotalAmount(totalPrice);
+		
+			newOrder.setStatus("waiting for billing");
+			
+			return orderRepository.save(newOrder);
+			
+		}
+		else
+		throw new CustomerException("Invalid customer details, please login first");
+		
+		
 	}
 
 	@Override
@@ -37,23 +79,15 @@ public class OrderServiceImpl implements OrderService {
 		return order;
 	}
 
-	@Override
-	public Order updateOrderDetails(Order order) throws OrderNotFoundException {
-
-		Order order1 = orderRepository.findById(order.getOrderNo())
-				.orElseThrow(() -> new OrderNotFoundException("Order Not Found"));
-
-		return orderRepository.save(order);
-	}
 
 	@Override
 	public List<Order> viewAllOrders(Integer customerId) throws OrderNotFoundException {
 		// TODO Auto-generated method stub
 
-List<Order>orderlList=customerRepository.findByCustomerId(customerId);
-if (orderlList.isEmpty()) {
-	throw new OrderNotFoundException("Order Not Found With customerId "+customerId);
-}
+		List<Order>orderlList=customerRepository.findByCustomerId(customerId);
+		if (orderlList.isEmpty()) {
+			throw new OrderNotFoundException("Order Not Found With customerId "+customerId);
+		}
 
 	
 		return orderlList;
