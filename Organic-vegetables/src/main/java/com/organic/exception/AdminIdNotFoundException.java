@@ -1,6 +1,6 @@
 package com.organic.exception;
 
-public class AdminIdNotFoundException extends Exception{
+public class AdminIdNotFoundException extends RuntimeException{
 
 	public AdminIdNotFoundException() {
 		// TODO Auto-generated constructor stub

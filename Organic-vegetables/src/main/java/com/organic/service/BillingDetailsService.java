@@ -7,12 +7,12 @@ import com.organic.model.BillingDetails;
 
 public interface BillingDetailsService {
 
-	public BillingDetails addBill(BillingDetails bill);
+//	public BillingDetails addBill(BillingDetails bill);
+//	
+//	
+//	public BillingDetails updateBill(BillingDetails bill)throws BillingDetailsNotFoundException;
 	
-	
-	public BillingDetails updateBill(BillingDetails bill)throws BillingDetailsNotFoundException;
-	
-	public BillingDetails viewBill(Integer billingId) throws BillingDetailsNotFoundException;
+	public BillingDetails viewBill(Integer orderId) throws BillingDetailsNotFoundException;
 	
 	
 }
