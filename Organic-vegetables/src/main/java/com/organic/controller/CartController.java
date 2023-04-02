@@ -17,6 +17,7 @@ import com.organic.exception.CartException;
 import com.organic.exception.VegetableException;
 import com.organic.model.Cart;
 import com.organic.model.Vegetable;
+import com.organic.model.VegetableDTO;
 import com.organic.service.CartService;
 
 @RestController
@@ -36,27 +37,27 @@ public class CartController {
 	}
 	
 	//add To Cart
-	@PostMapping("/add/{id}")
-	public ResponseEntity<Vegetable> addToCart(@RequestBody Vegetable veg,@PathVariable Integer id) throws VegetableException, CartException{
+	@PostMapping("/add/{vegId}/{customerId}")
+	public ResponseEntity<String> addToCart(@PathVariable Integer vegId,@PathVariable Integer customerId) throws VegetableException, CartException{
 		
-		Vegetable vegetable = cartService.addToCart(veg, id);
+		String vegetable = cartService.addToCart(vegId, customerId);
 	
-		return new ResponseEntity<Vegetable>(vegetable, HttpStatus.CREATED);
+		return new ResponseEntity<String>(vegetable, HttpStatus.CREATED);
 	}
 	
 	// Increase Quantity
 	
-	@PutMapping("/Increase/{cartId}/{vegId}/{quantity}")
-	public ResponseEntity<Cart> increaseQuantity(@PathVariable("cartId")Integer cartId,@PathVariable("vegId")Integer vegId,@PathVariable("quantity")Integer quantity) throws VegetableException, CartException{
-		Cart cart = cartService.increaseVegQantity(cartId, quantity, vegId);
+	@PutMapping("/Increase/{customerId}/{vegId}/{quantity}")
+	public ResponseEntity<Cart> increaseQuantity(@PathVariable Integer customerId,@PathVariable("vegId")Integer vegId,@PathVariable("quantity")Integer quantity) throws VegetableException, CartException{
+		Cart cart = cartService.increaseVegQantity(customerId, quantity, vegId);
 		return new ResponseEntity<>(cart,HttpStatus.OK);
 	}
 	
 	//Decrease Quantity
 	
-	@PutMapping("/decrease/{cartId}/{vegId}/{quantity}")
-	public ResponseEntity<Cart> decreaseQuantity(@PathVariable("cartId")Integer cartId,@PathVariable("vegId")Integer vegId,@PathVariable("quantity")Integer quantity) throws VegetableException, CartException{
-		Cart cart = cartService.decreaseVegQantity(cartId, quantity, vegId);
+	@PutMapping("/decrease/{customerId}/{vegId}/{quantity}")
+	public ResponseEntity<Cart> decreaseQuantity(@PathVariable Integer customerId,@PathVariable("vegId")Integer vegId,@PathVariable("quantity")Integer quantity) throws VegetableException, CartException{
+		Cart cart = cartService.decreaseVegQantity(customerId, quantity, vegId);
 		return new ResponseEntity<>(cart,HttpStatus.OK);
 	}
 	
@@ -78,10 +79,10 @@ public class CartController {
 	
 	
 	//view All vegetables
-	@GetMapping("viewAll/{id}")
-	public ResponseEntity<List<Vegetable>> listOfAllVegetableHandller(@PathVariable("id")Integer cartId) throws CartException{
+	@GetMapping("viewAllVegetableList/{customerId}")
+	public ResponseEntity<List<VegetableDTO>> listOfAllVegetableHandller(@PathVariable Integer customerId) throws CartException{
 
-		List<Vegetable> lists = cartService.viewAllItems(cartId);
+		List<VegetableDTO> lists = cartService.viewAllItems(customerId);
 		return new ResponseEntity<>(lists,HttpStatus.ACCEPTED);
 	}
 }

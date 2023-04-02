@@ -44,20 +44,21 @@ public class FeedbackServiceImpl implements FeedbackService{
 		
 		if(loggedInUser == null) throw new FeedbackException("Please login first, to give feedback");
 		
+		System.out.println(loggedInUser.getUserId()+"    "+feedback.getCustomerId() );
 		// 2nd check if customerId from feedback is same as loggedInUser (means:- same user is adding feedback).
-		if(loggedInUser.getUserId().equals(feedback.getCustomerId())) {
+		if(loggedInUser.getUserId()==feedback.getCustomerId()) {
 			
 			//3rd check whether any vegetable is exist with same vegId (which is provided in the feedback) or not.
 			Optional<Vegetable> existingVegetableOpt = vegetableRepository.findById(feedback.getVegId());
 			
-			if(existingVegetableOpt.isEmpty()) throw new VegetableException("No any vegetable found with this id");
+			if(existingVegetableOpt.isEmpty()) throw new VegetableException("No any vegetable found with this id : "+ feedback.getVegId());
 			
 			// 4th check whether this customer purchased this vegetable or not.
 			List<Order> orders = orderRepository.findByCustomerId(feedback.getCustomerId());
 			
-			boolean isPurchased = orders.stream().anyMatch(o -> o.getVegetableList().stream().anyMatch(v -> v.getVegId() == feedback.getVegId()));
+//			boolean isPurchased = orders.stream().anyMatch(o -> o.getVegetableList().stream().anyMatch(v -> v.getVegId() == feedback.getVegId()));
 			
-			if(!isPurchased) throw new OrderNotFoundException("Can't give feedback without purchase");
+//			if(!isPurchased) throw new OrderNotFoundException("Can't give feedback without purchase");
 			
 			return feedbackRepository.save(feedback);  // now feedback added
 			
@@ -69,7 +70,11 @@ public class FeedbackServiceImpl implements FeedbackService{
 	public List<Feedback> viewAllFeedbacks(Integer vegId) throws FeedbackException {
 		List<Feedback> feedbacks = feedbackRepository.findByVegId(vegId);
 		
-		if(feedbacks == null) throw new FeedbackException("No any feedback found");
+		Optional<Vegetable> existingVegetableOpt = vegetableRepository.findById(vegId);
+		
+		if(existingVegetableOpt.isEmpty()) throw new VegetableException("No any vegetable found with this id :"+ vegId);
+		
+		if(feedbacks.isEmpty()) throw new FeedbackException("No any feedback found");
 		
 		return feedbacks;
 		
@@ -79,7 +84,7 @@ public class FeedbackServiceImpl implements FeedbackService{
 	public List<Feedback> viewAllFeedbacksOfParticularCustomer(Integer customerId) throws FeedbackException {
 		List<Feedback> feedbacks = feedbackRepository.findByCustomerId(customerId);
 		
-		if(feedbacks == null) throw new FeedbackException("No any feedback found");
+		if(feedbacks.isEmpty()) throw new FeedbackException("No any feedback found");
 		
 		return feedbacks;
 	}

@@ -11,12 +11,11 @@ import com.organic.model.Order;
 @Service
 public interface OrderService {
 
-	public Order addOrder(Order order);
+	public Order addOrder(Integer customerId);
 	
 	public Order viewOrder(Integer orderNo)throws OrderNotFoundException;
 	
-	public Order updateOrderDetails(Order order) throws OrderNotFoundException;
-	
+	//Not 
 	public List<Order>viewAllOrders(Integer orderNo)throws OrderNotFoundException;
 	
 	public List<Order>viewAllOrdersByDate(LocalDate date)throws OrderNotFoundException;

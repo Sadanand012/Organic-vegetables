@@ -47,8 +47,8 @@ public class Customer {
 	@OneToOne(mappedBy = "customer",cascade = CascadeType.ALL)
 	private BillingDetails billingDetails;
 	
-	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL)
-	private Order order;
+//	@JsonIgnore
+//	@OneToOne(cascade = CascadeType.ALL)
+//	private Order order;
 
 }

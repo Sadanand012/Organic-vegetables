@@ -5,6 +5,8 @@ import java.util.List;
 
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -27,9 +29,9 @@ public class Cart {
 	
 	private Integer customerId;
 
-
-	@OneToMany(mappedBy = "cart",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-	private List<Vegetable> vegetable = new ArrayList<>();
+	@Embedded
+	@ElementCollection
+	private List<VegetableDTO> vegetable = new ArrayList<>();
 
 
 }

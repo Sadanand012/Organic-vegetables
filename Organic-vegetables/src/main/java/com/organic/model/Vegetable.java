@@ -28,13 +28,5 @@ public class Vegetable {
 	private String type;
 	private Double price;
 	private Integer quantity;
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JsonIgnore
-	private Order order;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JsonIgnore
-	private Cart cart;
 	
-		
 }

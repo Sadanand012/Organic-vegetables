@@ -1,15 +1,13 @@
 package com.organic.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +16,8 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -41,10 +41,11 @@ public class Order {
 //	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "order")
 //	@JsonIgnore
 //	private Cart cart;
+//	
+	@Embedded
+	@ElementCollection
+	@JsonIgnore
+	private List<VegetableDTO> vegetableList=new ArrayList<>();
 	
-	@OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
-	private List<Vegetable> vegetableList=new ArrayList<>();
 	
-	@OneToOne(mappedBy = "order",cascade = CascadeType.ALL)
-	private Customer customer;
 }
