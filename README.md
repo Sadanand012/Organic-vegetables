@@ -1,9 +1,7 @@
 #Organic Vegetable
 
 #E-R Diagram
-
-
-![E-R Diagram](https://user-images.githubusercontent.com/107461052/212683690-1910c6e2-cb10-409e-b1ee-d94c6c18f246.png)
+![ER](https://user-images.githubusercontent.com/105914736/229365750-e2f68b2d-fc3a-464f-ae5d-e46fd0cad280.png)
 
 <br>
 <br>
