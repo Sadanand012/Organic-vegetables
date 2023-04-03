@@ -1,18 +1,3 @@
-#Organic Vegetable
-
-#E-R Diagram
-![ER](https://user-images.githubusercontent.com/105914736/229365750-e2f68b2d-fc3a-464f-ae5d-e46fd0cad280.png)
-
-<br>
-<br>
-#WorkFlow
-<br>
-
-![WorkFlow](https://user-images.githubusercontent.com/107461052/212683750-11c64541-9c01-4137-9e1f-539b31994b85.png)
-
-
-
-
 # Organic_Vegetables (Online Vegetable Sales Application)
 # BackEnd(REST API)for an Online Vegetable Sales Application
 <br>
@@ -37,6 +22,24 @@
 - The application is built using modern technologies such as Spring Boot.
 - It includes a swagger documentation for the endpoints.
 - The application follows best practices for security in terms of input validation and access control.
+
+<br>
+</br>
+
+#E-R Diagram
+
+
+![ER](https://user-images.githubusercontent.com/105914736/229365750-e2f68b2d-fc3a-464f-ae5d-e46fd0cad280.png)
+
+<br>
+<br>
+
+
+#WorkFlow
+<br>
+
+![WorkFlow](https://user-images.githubusercontent.com/107461052/212683750-11c64541-9c01-4137-9e1f-539b31994b85.png)
+
 
 <br>
 
