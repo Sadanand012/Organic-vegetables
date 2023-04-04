@@ -9,6 +9,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,17 +33,12 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer orderNo;
+	@NotEmpty
 	private Integer customerId;
 	private Double totalAmount;
 	private String status;
 	private LocalDate date;
 	
-//	make customer and billing relation
-	
-//	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "order")
-//	@JsonIgnore
-//	private Cart cart;
-//	
 	@Embedded
 	@ElementCollection
 	@JsonIgnore

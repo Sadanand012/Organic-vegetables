@@ -4,11 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,18 +23,16 @@ public class Admin {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer adminId;
 	
-//	@NotNull(message = "Admin name should not be null")
-//	@NotBlank(message = "Admin Name should not black")
+	@NotNull(message = "Admin name should not be null")
+	@NotBlank(message = "Admin Name should not black")
 	private String adminName;
 	
 	private String contactNumber;
-//	@Email
+	@Email
 	private String emailId;
 	
+	@Size(min = 3,max = 10,message = "Password should be contain min 3 and max 10 ")
 	private String password;
-	
-//	@OneToOne
-//	private User user;
 	
 	
 }

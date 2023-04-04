@@ -18,6 +18,8 @@ import com.organic.exception.VegetableException;
 import com.organic.model.Vegetable;
 import com.organic.service.VegetableServiceImpl;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class VegetableController {
 
@@ -27,7 +29,7 @@ public class VegetableController {
 	
 	
 	@PostMapping("/addVegetable")
-	public ResponseEntity<Vegetable> addVegetableH(@RequestBody Vegetable vegetable){
+	public ResponseEntity<Vegetable> addVegetableH(@Valid @RequestBody Vegetable vegetable){
 //		System.out.println(vegetable);
 		Vegetable veg=vs.addVegetable(vegetable);
 		return new ResponseEntity<>(veg,HttpStatus.CREATED);

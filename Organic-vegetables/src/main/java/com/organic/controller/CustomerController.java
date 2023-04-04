@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.organic.model.Customer;
 import com.organic.service.CustomerService;
 
+import jakarta.validation.Valid;
+
 
 
 @RestController
@@ -26,7 +28,7 @@ public class CustomerController {
 	
 	
 	@PostMapping("/customers")
-	public ResponseEntity<Customer> addCustomerHandler(@org.springframework.web.bind.annotation.RequestBody Customer customer){
+	public ResponseEntity<Customer> addCustomerHandler(@Valid @RequestBody Customer customer){
 		
 		Customer registeredCustomer = customerService.addCustomer(customer);
 		
@@ -36,7 +38,7 @@ public class CustomerController {
 	
 	
 	@PutMapping("/customers/{key}")
-	public ResponseEntity<Customer> updateCustomerHandler(@org.springframework.web.bind.annotation.RequestBody Customer customer, @PathVariable("key") String sessionKey){
+	public ResponseEntity<Customer> updateCustomerHandler(@RequestBody Customer customer, @PathVariable("key") String sessionKey){
 		
 		Customer updatedCustomer = customerService.updateCustomer(customer, sessionKey);
 		

@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -16,10 +14,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -35,9 +33,10 @@ public class Customer {
 	private String customerName;
 	@NotNull
 	private String mobileNumber;
-	@NotNull
+	@Email
 	private String emailId;
 	@NotNull
+	@Size(min = 3,max = 10,message = "Password should be contain min 3 and max 10 ")
 	private String password;
 	
 	@Embedded
@@ -46,9 +45,5 @@ public class Customer {
 	@JsonIgnore
 	@OneToOne(mappedBy = "customer",cascade = CascadeType.ALL)
 	private BillingDetails billingDetails;
-	
-//	@JsonIgnore
-//	@OneToOne(cascade = CascadeType.ALL)
-//	private Order order;
 
 }
