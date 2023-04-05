@@ -9,6 +9,8 @@ import com.organic.exception.UserException;
 import com.organic.model.User;
 import com.organic.service.UserLoginServiceImpl;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class UserController {
 	
@@ -16,7 +18,7 @@ public class UserController {
 	private UserLoginServiceImpl userService;
 	
 	@PostMapping("/login")
-    public ResponseEntity<String> logInUserHandler(@RequestBody User user) throws UserException {
+    public ResponseEntity<String> logInUserHandler(@Valid @RequestBody User user) throws UserException {
 
         String key = userService.logIn(user);
 

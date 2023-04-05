@@ -15,6 +15,8 @@ import com.organic.exception.UserException;
 import com.organic.model.Feedback;
 import com.organic.service.FeedbackService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class FeedbackController {
 	
@@ -23,7 +25,7 @@ public class FeedbackController {
 	
 	
 	@PostMapping("/feedbacks/{key}")
-	public ResponseEntity<Feedback> addFeedback(@RequestBody Feedback feedback, @PathVariable("key") String sessionKey) throws UserException{
+	public ResponseEntity<Feedback> addFeedback(@Valid @RequestBody Feedback feedback, @PathVariable("key") String sessionKey) throws UserException{
 		
 		Feedback addedFeedback = feedbackService.addFeedback(feedback, sessionKey);
 		

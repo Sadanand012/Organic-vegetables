@@ -19,6 +19,8 @@ import com.organic.exception.UserException;
 import com.organic.model.Admin;
 import com.organic.service.AdminService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class AdminController {
 	
@@ -28,7 +30,7 @@ public class AdminController {
 	//Register Admin
 	
 	@PostMapping(path="/registerAdmin/{authorization_key}")
-	public ResponseEntity<Admin> registerNewAdminHandler(@RequestBody Admin admin,@PathVariable String authorization_key) throws AdminAlreadyExistException, AdminIdNotFoundException{
+	public ResponseEntity<Admin> registerNewAdminHandler(@Valid @RequestBody Admin admin,@PathVariable String authorization_key) throws AdminAlreadyExistException, AdminIdNotFoundException{
 		
 		Admin addAdmin= adminServiceDao.addAdmin(admin,authorization_key);
 		
@@ -39,7 +41,7 @@ public class AdminController {
 	
 	//Update Admin
 	@PutMapping(path="/updateAdmin/{key}")
-	public ResponseEntity<Admin> updateAdm(@RequestBody Admin admin,@PathVariable("key") String key) throws NoAdminFoundException, UserException{
+	public ResponseEntity<Admin> updateAdm(@Valid @RequestBody Admin admin,@PathVariable("key") String key) throws NoAdminFoundException, UserException{
 		Admin updateAdm= adminServiceDao.updateAdmin(admin,key);
 		
 		return new ResponseEntity<Admin> (updateAdm,HttpStatus.OK);

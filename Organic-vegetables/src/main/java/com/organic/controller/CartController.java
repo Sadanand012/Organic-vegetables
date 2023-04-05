@@ -20,6 +20,8 @@ import com.organic.model.Vegetable;
 import com.organic.model.VegetableDTO;
 import com.organic.service.CartService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class CartController {
 	
@@ -29,7 +31,7 @@ public class CartController {
 	
 	//Create Cart
 	@PostMapping("/Cart")
-	public ResponseEntity<Cart> CreateCart(@RequestBody Cart cart) throws CartException{
+	public ResponseEntity<Cart> CreateCart(@Valid @RequestBody Cart cart) throws CartException{
 		
 		Cart c1 = cartService.createCart(cart);
 	
