@@ -36,10 +36,16 @@
 
 
 #WorkFlow
-<br>
 
-![WorkFlow](https://user-images.githubusercontent.com/107461052/212683750-11c64541-9c01-4137-9e1f-539b31994b85.png)
-
+* User Login
+* Admin
+* Customer
+* Cart
+* Vegetables
+* Order
+* Billing
+* Feedback
+* LogOut
 
 <br>
 
