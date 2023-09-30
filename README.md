@@ -20,7 +20,7 @@
 - The application is continuously integrated and deployed.
 - This repository is open-source and contributions are welcome.
 - The application is built using modern technologies such as Spring Boot.
-- It includes a swagger documentation for the endpoints.
+- It includes swagger documentation for the endpoints.
 - The application follows best practices for security in terms of input validation and access control.
 
 <br>
@@ -49,9 +49,7 @@
 
 <br>
 
-* This project is developed by team of 5 Aspiring Developers . 
-## Video Link
-https://drive.google.com/file/d/13exSFeoNrnnGg4XY_wA1l5-VJC8-ad81/view
+* This project is developed by a team of 5 Aspiring Developers. 
 
 ## Tech Stack
 
@@ -76,15 +74,15 @@ https://drive.google.com/file/d/13exSFeoNrnnGg4XY_wA1l5-VJC8-ad81/view
 ## Features
 
 ---------------------------------------------------------------------------------
-* Customer and Admin authentication & validation with usersession's sessionid.
+* Customer and Admin authentication & validation with user-session's session-id.
 * Admin Features:
     * Administrator Role of the entire application
-    * Only registered admins with valid sessionid can add/update/delete Vegetable in the database.
-    * Admin can access the details of orders, bill details, customer list.
+    * Only registered admins with valid session IDs can add/update/delete vegetables in the database.
+    * Admin can access the details of orders, bill details, and customer lists.
 * Customer Features:
-    * Registering themselves with application, and logging in to get the valid sessionid.
-    * Customer can add vegetables into the cart
-    * Only logged in user can access their all order history.
+    * Registering themselves with the application, and logging in to get the valid session.
+    * Customer can add vegetables to the cart
+    * Only logged-in user can access their all order history.
 
 --------------------------------------------------------------------------------
 ## Contributors
@@ -97,7 +95,6 @@ https://drive.google.com/file/d/13exSFeoNrnnGg4XY_wA1l5-VJC8-ad81/view
 <br>
 *<a href="https://github.com/MrVivek30">Vivek Chowdhary</a>
 <br>
-*<a href="">Arun Kumar</a>
 
 
 ## Installation & Run
@@ -119,10 +116,3 @@ https://drive.google.com/file/d/13exSFeoNrnnGg4XY_wA1l5-VJC8-ad81/view
 
 `http://localhost:8080/swagger-ui.html`
 
-
-## API Module Endpoints
-
-### Customer Module
-
-
-* `POST /customer` : Register customer by providing valid details
