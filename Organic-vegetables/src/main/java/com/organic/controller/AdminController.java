@@ -66,6 +66,7 @@ public class AdminController {
 		return new ResponseEntity<Admin>(removeAdm,HttpStatus.OK); 
 	}
 	
+	// EREEEEE 
 	//View All 
 	@GetMapping(path="/viewAdmin")
 	public ResponseEntity<List> viewAdm(){
